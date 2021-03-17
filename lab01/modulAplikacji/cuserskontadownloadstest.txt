@@ -1,0 +1,7 @@
+raport1.odt = 249f14ca29daa9ead22005c4961eeb42
+plik_200226104929.rtf = 79034b6e86ed4c9ee64573be65d192a9
+bdfbfdb.txt = 15dce356eb794c3429419d69dfb6be0e
+Sprawozdanie_248862_lab_4.pdf = af4af1181be77c43f7caa5cdb6805a94
+Pol and Rock 2019.docx = 9e068c0394a75338a7594125e51d70ca
+gdnhgfnfgn.txt = f7e3cf0ad5fccdd2d3d248147bd7b4aa
+Sprawozdanie.docx = 8a0df87c3f9907a954ba3aac4b799c42

@@ -1,0 +1,5 @@
+LaboratoriaJava2020.txt=5b628a8af480d5f973c05c1c939655
+test.rar=204e8ea6df58c332e51df6cd9385cf3
+lubuntu-18.04-alternate-amd64.iso=16cd9b46d5bf19f55aa269fbdd4a9d79
+desktop.ini=3a3731259712d4e12d27240137ff377
+debian-headless.ova=c9536661e57bce4b499ccc68fb11b82

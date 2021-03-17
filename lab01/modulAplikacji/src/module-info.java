@@ -1,0 +1,3 @@
+module modulAplikacji {
+	requires modulBiblioteki;
+}
