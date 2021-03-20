@@ -101,7 +101,7 @@ public class MainWindowController {
     @FXML
     void firstQuestionCheckButtonOnAction(ActionEvent event) {
     	String population = populationInputTextField.getText();
-    	String[] cityCodes = {"Q270", "Q1799", "Q588", "Q31487", "Q1792", "Q64", "Q90", "Q727", "Q220"};
+    	String[] cityCodes = {"Q270", "Q1799", "Q588", "Q31487", "Q1792", "Q64", "Q90", "Q2807", "Q727", "Q220"};
     	int index = cityFirstQuestionComboBox.getSelectionModel().getSelectedIndex();
     	String url = RequestMaker.buildUrlForCountCities(cityCodes[index], population);
     	CountriesQuote countriesQuote = RequestMaker.makeRequestAndGetBodyForCount(url);
