@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Metadata {
 	private long currentOffset;
 	private long totalCount;
-	
+
 	public long getCurrentOffset() {
 		return currentOffset;
 	}
@@ -24,12 +24,12 @@ public class Metadata {
 	}
 
 	@Override
-	  public String toString() {
-	    StringBuilder sb = new StringBuilder();
-	    sb.append("class Metadata {\n");
-	    sb.append("    currenctOffset: ").append(this.currentOffset).append("\n");
-	    sb.append("    totalCount: ").append(this.totalCount).append("\n");
-	    sb.append("}");
-	    return sb.toString();
-	  }
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class Metadata {\n");
+		sb.append("    currenctOffset: ").append(this.currentOffset).append("\n");
+		sb.append("    totalCount: ").append(this.totalCount).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 }
