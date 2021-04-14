@@ -14,6 +14,11 @@ public class ToUpperCaseProcessor implements Processor, Runnable {
 	@Override
 	public void run() {
 		int progressController = this.inputLength / 10;
+		
+		if (progressController == 0) {
+			progressController = 1;
+		}
+		
 		for(int i = 0; i < this.inputLength; i++) {
 			this.result += Character.toUpperCase(input.charAt(i));
 			

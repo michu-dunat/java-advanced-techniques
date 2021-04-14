@@ -17,10 +17,17 @@ public class SwapWordPositionProcessor implements Processor, Runnable {
 	public void run() {
 		int progressController = this.inputLength / 10;
 		
+		if (progressController == 0) {
+			progressController = 1;
+		}
+		
 		for(int i = 0; i < this.inputLength; i++) {
 			String temp = input[i];
 			Random random = new Random();
-			int randomInt = random.nextInt(this.inputLength);
+			int randomInt;
+			do {
+				randomInt = random.nextInt(this.inputLength);
+			} while (randomInt < i);
 			input[i] = input[randomInt];
 			input[randomInt] = temp;
 			result += input[i];

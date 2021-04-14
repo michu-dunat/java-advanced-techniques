@@ -46,15 +46,15 @@ public class MainWindowController {
 	@FXML
 	private Button chooseDirectoryButton;
 	
-	HashMap<String, Path> getInfoAndPathMap;
+	HashMap<String, Path> nameInfoAndPathMap;
 	ClassLoaderExtension classLoaderExtension;
 	Class<?> processorClass;
-	Method getInfo;
-	Object object;
-	String info;
+	Method getInfoMethod;
+	Object loadedClassObject;
+	String processorInfo;
 	Class<?>[] parameterTypes;
-	Method submitTask;
-	Method getResult;
+	Method submitTaskMethod;
+	Method getResultMethod;
 
 	@FXML
 	void chooseDirectoryButtonOnAction(ActionEvent event) {
@@ -73,11 +73,11 @@ public class MainWindowController {
 		for (Path path : classPaths) {
 			try {
 				processorClass = classLoaderExtension.findClass(path.toString());
-				getInfo = processorClass.getMethod("getInfo");
-				object = processorClass.getDeclaredConstructor().newInstance();
-				info = (String) getInfo.invoke(object);
-				infoList.add(info);
-				getInfoAndPathMap.put(info, path);
+				getInfoMethod = processorClass.getMethod("getInfo");
+				loadedClassObject = processorClass.getDeclaredConstructor().newInstance();
+				processorInfo = (String) getInfoMethod.invoke(loadedClassObject);
+				infoList.add(path.getFileName() + " - " + processorInfo);
+				nameInfoAndPathMap.put(path.getFileName() + " - " + processorInfo, path);
 			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}	
@@ -85,18 +85,21 @@ public class MainWindowController {
 		
 		classLoaderExtension = null;
 		processorClass = null;
-		getInfo = null;
-		object = null;
-		info = null;
+		getInfoMethod = null;
+		loadedClassObject = null;
+		processorInfo = null;
 		System.gc();
 		
-		ObservableList<String> classPathsObservableSet = FXCollections.observableArrayList(infoList);
-		classListView.getItems().addAll(classPathsObservableSet);
+		ObservableList<String> classNameAndInfoObservableList = FXCollections.observableArrayList(infoList);
+		classListView.getItems().addAll(classNameAndInfoObservableList);
+		
+		submitButton.setDisable(false);
 	}
 
 	@FXML
 	public void initialize() {
-		getInfoAndPathMap = new HashMap<>();
+		submitButton.setDisable(true);
+		nameInfoAndPathMap = new HashMap<>();
 		textInput.setText("Litwa. PóŸnym wieczorem w cmentarnej kaplicy gromadz¹ siê wieœniacy przybyli na\n"
 				+ "„ucztê koz³a”, czyli noc Dziadów. Przewodz¹cy obrzêdom Guœlarz przywo³uje duchy zmar³ych\n"
 				+ "osób („czyscowe duszeczki” - dusze czyœæcowe), które nie mog¹ po œmierci zaznaæ wiecznego\n"
@@ -110,7 +113,7 @@ public class MainWindowController {
 		submitButton.setDisable(true);
 		
 		String selectedInfo = classListView.getSelectionModel().getSelectedItem();
-		Path absolutePath = getInfoAndPathMap.get(selectedInfo);
+		Path absolutePath = nameInfoAndPathMap.get(selectedInfo);
 		
 		classLoaderExtension = new ClassLoaderExtension();
 		StatusListenerImplementation statusListenerImplementation = new StatusListenerImplementation();
@@ -118,11 +121,11 @@ public class MainWindowController {
 		try {
 			processorClass = classLoaderExtension.findClass(absolutePath.toString());
 			parameterTypes = new Class<?>[] {String.class, StatusListener.class};
-			Object[] arguments = {textInput.getText(), statusListenerImplementation};
-			object = processorClass.getDeclaredConstructor().newInstance();
-			submitTask = processorClass.getMethod("submitTask", parameterTypes);
-			getResult = processorClass.getMethod("getResult");
-			submitTask.invoke(object, arguments);
+			Object[] submitTaskArguments = {textInput.getText(), statusListenerImplementation};
+			loadedClassObject = processorClass.getDeclaredConstructor().newInstance();
+			submitTaskMethod = processorClass.getMethod("submitTask", parameterTypes);
+			getResultMethod = processorClass.getMethod("getResult");
+			submitTaskMethod.invoke(loadedClassObject, submitTaskArguments);
 
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -136,15 +139,15 @@ public class MainWindowController {
 				}
 
 				updateProgress(1, 1);
-				textOutput.setText( (String) getResult.invoke(object) );
+				textOutput.setText( (String) getResultMethod.invoke(loadedClassObject) );
 				submitButton.setDisable(false);
 				progressBar.progressProperty().unbind();
 				
 				processorClass = null;
 				parameterTypes = null;
-				object = null;
-				submitTask = null;
-				getResult = null;
+				loadedClassObject = null;
+				submitTaskMethod = null;
+				getResultMethod = null;
 				classLoaderExtension = null;
 				System.gc();
 

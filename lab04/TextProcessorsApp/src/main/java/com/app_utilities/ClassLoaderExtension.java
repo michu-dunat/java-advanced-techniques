@@ -10,15 +10,13 @@ public class ClassLoaderExtension extends ClassLoader {
 	@Override
 	public Class<?> findClass(String fileName) throws ClassNotFoundException {
 		Path absolutePath = Paths.get(fileName);
-		byte[] classToLoad = null;
+		byte[] loadedClass = null;
 		try {
-			classToLoad = Files.readAllBytes(absolutePath);
-
+			loadedClass = Files.readAllBytes(absolutePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return defineClass(null, classToLoad, 0, classToLoad.length);
+		return defineClass(null, loadedClass, 0, loadedClass.length);
 	}
-
 }

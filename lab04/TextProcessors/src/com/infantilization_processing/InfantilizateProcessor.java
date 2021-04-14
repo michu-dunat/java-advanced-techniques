@@ -15,6 +15,10 @@ public class InfantilizateProcessor implements Processor, Runnable {
 	public void run() {
 		int progressController = this.inputLength / 10;
 		
+		if (progressController == 0) {
+			progressController = 1;
+		}
+		
 		for(int i = 0; i < this.inputLength; i++) {
 			String word = input[i];
 			word = word.replaceAll("(?i)wzi¹æ", "wzi¹œæ");

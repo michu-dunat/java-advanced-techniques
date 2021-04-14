@@ -14,7 +14,7 @@ public class RequestMaker {
 	private static HttpEntity<String> createHeadersAndBuildRequest() {
 		// create headers
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("x-rapidapi-key", "10b9e8e422msh6aa3da9800a8072p11911cjsncd509e7e86f7");
+		headers.add("x-rapidapi-key", "");
 		headers.add("x-rapidapi-host", "wft-geo-db.p.rapidapi.com");
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
