@@ -1,0 +1,2 @@
+serviceloader.impl.ClusterAnalysisServiceImplNumberTypeDeterminator
+serviceloader.impl.ClusterAnalysisServiceImplQuarterCalculator
