@@ -55,3 +55,20 @@ Tasks are commissioned to class instances through the submitTask(String task, St
 The processing.Status class is used to represent the processing status (this class is declared so that its attributes are read-only after the status is created).
 
 The processing is implemented in a lagging thread in order to be able to monitor the current status of the processing (on ProgressBar).
+
+## Lab05
+
+I implemented an application with a graphical interface (JavaFX) that allows you to perform cluster analysis on tabular data.
+This application enables:
+- adding, deleting and displaying tabular data,
+- selecting the algorithm with which they will be processed,
+- displaying the processing results.
+
+Implemented algorithms:
+- determination of the type of number (real number, complex number or imaginary number),
+- definition of a quarter of a point.
+
+During the implementation, I used the Service Provider Interface (SPI).
+More precisely, using the SPI approach, I provided the application with the ability to load classes implementing a given interface after the application was build itself.
+These classes (with selected cluster analysis algorithms implemented) are provided in .jar files.
+Two versions of the project were created: standard and modular (Java 9).
