@@ -1,1 +1,3 @@
+serviceloader\impl\ClusterAnalysisServiceImplNumberTypeDeterminator.class
+serviceloader\impl\ClusterAnalysisServiceImplQuarterCalculator.class
 META-INF\services\ex.api.ClusterAnalysisService

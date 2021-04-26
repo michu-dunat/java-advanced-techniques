@@ -1,0 +1,3 @@
+serviceloader\controllers\MainWindowController.class
+serviceloader\client\Client.class
+serviceloader\controllers\TableRecord.class
