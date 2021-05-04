@@ -51,8 +51,6 @@ public class MainWindowController {
 
     @FXML
     void viewReceivablesPaymentsMakePaymentButtonOnAction(ActionEvent event) {
-
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccruedReceivablesPayments.fxml"));
         loader.setControllerFactory(springContext::getBean);
 
@@ -78,6 +76,7 @@ public class MainWindowController {
     @FXML
     void startSimulationButtonOnAction(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/LogsView.fxml"));
+        loader.setControllerFactory(springContext::getBean);
         Parent root = null;
         try {
             Thread.sleep(2000);

@@ -66,6 +66,7 @@
             <TextField fx:id="addressTextField" layoutX="508.0" layoutY="450.0" />
             <TextField fx:id="routerIdTextField" layoutX="508.0" layoutY="491.0" />
             <Button fx:id="backButton" layoutX="700.0" layoutY="632.0" mnemonicParsing="false" onAction="#backButtonOnAction" text="Go back" />
+            <Button fx:id="testButton" layoutX="607.0" layoutY="632.0" mnemonicParsing="false" onAction="#testButtonOnAction" text="Test" />
          </children>
     </AnchorPane>
   </children>

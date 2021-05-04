@@ -301,4 +301,43 @@ public class ClientInstallationPriceListController {
         stage.show();
     }
 
+    @FXML
+    private Button testButton;
+
+    @FXML
+    void testButtonOnAction(ActionEvent event) {
+        Client client = new Client("Jan", "Kowalski");
+        clientRepository.save(client);
+        Client client1 = new Client("Paweł", "Piotrowski");
+        clientRepository.save(client1);
+        Client client2 = new Client("Natalia", "Cicha");
+        clientRepository.save(client2);
+        refreshClients();
+
+        Service service = new Service("Internet 100", (float) 30.00);
+        serviceRepository.save(service);
+        Service service1 = new Service("Internet 200", (float) 35.00);
+        serviceRepository.save(service1);
+        Service service2 = new Service("Światłowód 750", (float) 60.00);
+        serviceRepository.save(service2);
+        Service service3 = new Service("Światłowód 1000", (float) 65.00);
+        serviceRepository.save(service3);
+        Service service4 = new Service("VPN", (float) 15.00);
+        serviceRepository.save(service4);
+        refreshServices();
+
+        Installation installation = new Installation("Tychy",50, service, client);
+        installationRepository.save(installation);
+        Installation installation1 = new Installation("Wrocław",50, service1, client);
+        installationRepository.save(installation1);
+        Installation installation2 = new Installation("Rybnik",50, service2, client1);
+        installationRepository.save(installation2);
+        Installation installation3 = new Installation("Katowice",50, service3, client1);
+        installationRepository.save(installation3);
+        Installation installation4 = new Installation("Poznań",50, service4, client);
+        installationRepository.save(installation4);
+        refreshInstallations();
+
+    }
+
 }

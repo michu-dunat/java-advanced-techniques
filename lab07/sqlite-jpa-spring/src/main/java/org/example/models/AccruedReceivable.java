@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class AccruedReceivable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private LocalDate dueDate;
