@@ -1,6 +1,7 @@
 package com.example.jaxwshibernate.services;
 
 import com.example.jaxwshibernate.dto.ClientRequest;
+import com.example.jaxwshibernate.dto.ClientUpdateRequest;
 import com.example.jaxwshibernate.dto.ClientsResponse;
 
 import javax.jws.WebService;
@@ -12,5 +13,7 @@ public interface ClientService {
     public ClientsResponse getAllClients();
 
     public Integer addClient(@XmlElement(required=true) ClientRequest request);
+
+    public void deleteClient(@XmlElement(required=true) Integer clientId);
 
 }

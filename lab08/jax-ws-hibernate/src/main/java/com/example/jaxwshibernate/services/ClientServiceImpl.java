@@ -1,6 +1,7 @@
 package com.example.jaxwshibernate.services;
 
 import com.example.jaxwshibernate.dto.ClientRequest;
+import com.example.jaxwshibernate.dto.ClientUpdateRequest;
 import com.example.jaxwshibernate.dto.ClientsResponse;
 import com.example.jaxwshibernate.models.Client;
 import com.example.jaxwshibernate.repositories.ClientRepository;
@@ -29,6 +30,12 @@ public class ClientServiceImpl implements ClientService {
         Client client = new Client(request.getFirstName(), request.getLastName());
         client = clientRepository.save(client);
         return client.getId();
+    }
+
+    @Override
+    public void deleteClient(Integer clientId) {
+        Client client = clientRepository.getOne(clientId);
+        clientRepository.delete(client);
     }
 
 

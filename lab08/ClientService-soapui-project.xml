@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="0bd49b07-c95b-4bf2-b7c8-92e53f8bc14b" activeEnvironment="Default" name="Lab08" resourceRoot="" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="86f0fa49-a947-40ab-9a97-e61ea0d5038d" wsaVersion="NONE" name="ClientServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://services.jaxwshibernate.example.com/}ClientServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/services/clientservice?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/services/clientservice?wsdl"><con:part><con:url>http://localhost:8080/services/clientservice?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ClientServiceImplService" targetNamespace="http://services.jaxwshibernate.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.jaxwshibernate.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.jaxwshibernate.example.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addClient" type="tns:addClient"/>
+      <xs:element name="addClientResponse" type="tns:addClientResponse"/>
+      <xs:element name="deleteClient" type="tns:deleteClient"/>
+      <xs:element name="deleteClientResponse" type="tns:deleteClientResponse"/>
+      <xs:element name="getAllClients" type="tns:getAllClients"/>
+      <xs:element name="getAllClientsResponse" type="tns:getAllClientsResponse"/>
+      <xs:complexType name="getAllClients">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getAllClientsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ClientsResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ClientsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="clients" nillable="true" type="tns:client"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="client">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addClient">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:ClientRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ClientRequest">
+        <xs:sequence>
+          <xs:element name="firstName" type="xs:string"/>
+          <xs:element name="lastName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addClientResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteClient">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteClientResponse">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAllClients">
+    <wsdl:part element="tns:getAllClients" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllClientsResponse">
+    <wsdl:part element="tns:getAllClientsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteClientResponse">
+    <wsdl:part element="tns:deleteClientResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addClientResponse">
+    <wsdl:part element="tns:addClientResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addClient">
+    <wsdl:part element="tns:addClient" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteClient">
+    <wsdl:part element="tns:deleteClient" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ClientService">
+    <wsdl:operation name="getAllClients">
+      <wsdl:input message="tns:getAllClients" name="getAllClients"></wsdl:input>
+      <wsdl:output message="tns:getAllClientsResponse" name="getAllClientsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addClient">
+      <wsdl:input message="tns:addClient" name="addClient"></wsdl:input>
+      <wsdl:output message="tns:addClientResponse" name="addClientResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteClient">
+      <wsdl:input message="tns:deleteClient" name="deleteClient"></wsdl:input>
+      <wsdl:output message="tns:deleteClientResponse" name="deleteClientResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClientServiceImplServiceSoapBinding" type="tns:ClientService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllClients">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllClients">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllClientsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addClient">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addClient">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addClientResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteClient">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteClient">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteClientResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClientServiceImplService">
+    <wsdl:port binding="tns:ClientServiceImplServiceSoapBinding" name="ClientServiceImplPort">
+      <soap:address location="http://localhost:8080/services/clientservice"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/services/clientservice</con:endpoint></con:endpoints><con:operation id="2587336c-a448-48f5-b875-c9f81fc74b95" isOneWay="false" action="" name="getAllClients" bindingOperationName="getAllClients" type="Request-Response" outputName="getAllClientsResponse" inputName="getAllClients" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="01344843-5604-43f7-b7f7-0aae43a11778" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/clientservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:getAllClients/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ClientService/getAllClients"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4de14253-faf6-403c-8484-d815f40212f8" isOneWay="false" action="" name="addClient" bindingOperationName="addClient" type="Request-Response" outputName="addClientResponse" inputName="addClient" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d2661d63-c1e8-4650-93eb-295e1e1843b0" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/clientservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:addClient>\r
+         <arg0>\r
+            <firstName>Marcin</firstName>\r
+            <lastName>Firemage</lastName>\r
+         </arg0>\r
+      </ser:addClient>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ClientService/addClient"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="90c310fb-6054-4f35-a6ad-ad27fe080662" isOneWay="false" action="" name="deleteClient" bindingOperationName="deleteClient" type="Request-Response" outputName="deleteClientResponse" inputName="deleteClient" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b7561f63-e64a-41e4-9b70-b13c5ec9b0ce" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/clientservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:deleteClient>\r
+         <arg0>4</arg0>\r
+      </ser:deleteClient>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ClientService/deleteClient"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="2251700f-a110-4cc4-b45b-e6cf4888f2a2" wsaVersion="NONE" name="InstallationServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://services.jaxwshibernate.example.com/}InstallationServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/services/installationservice?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/services/installationservice?wsdl"><con:part><con:url>http://localhost:8080/services/installationservice?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="InstallationServiceImplService" targetNamespace="http://services.jaxwshibernate.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.jaxwshibernate.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.jaxwshibernate.example.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addInstallation" type="tns:addInstallation"/>
+      <xs:element name="addInstallationResponse" type="tns:addInstallationResponse"/>
+      <xs:element name="getAllUserInstallations" type="tns:getAllUserInstallations"/>
+      <xs:element name="getAllUserInstallationsResponse" type="tns:getAllUserInstallationsResponse"/>
+      <xs:complexType name="getAllUserInstallations">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAllUserInstallationsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ClientsResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ClientsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="userInstallations" nillable="true" type="tns:installation"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="installation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="clientId" type="tns:client"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="routerId" type="xs:int"/>
+          <xs:element minOccurs="0" name="serviceId" type="tns:service"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="client">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="service">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="price" type="xs:float"/>
+          <xs:element minOccurs="0" name="serviceType" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addInstallation">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:InstallationRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InstallationRequest">
+        <xs:sequence>
+          <xs:element name="address" type="xs:string"/>
+          <xs:element name="routerId" type="xs:int"/>
+          <xs:element name="clientId" type="xs:int"/>
+          <xs:element name="serviceId" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addInstallationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAllUserInstallationsResponse">
+    <wsdl:part element="tns:getAllUserInstallationsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllUserInstallations">
+    <wsdl:part element="tns:getAllUserInstallations" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addInstallationResponse">
+    <wsdl:part element="tns:addInstallationResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addInstallation">
+    <wsdl:part element="tns:addInstallation" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="InstallationService">
+    <wsdl:operation name="getAllUserInstallations">
+      <wsdl:input message="tns:getAllUserInstallations" name="getAllUserInstallations"></wsdl:input>
+      <wsdl:output message="tns:getAllUserInstallationsResponse" name="getAllUserInstallationsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addInstallation">
+      <wsdl:input message="tns:addInstallation" name="addInstallation"></wsdl:input>
+      <wsdl:output message="tns:addInstallationResponse" name="addInstallationResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InstallationServiceImplServiceSoapBinding" type="tns:InstallationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllUserInstallations">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllUserInstallations">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllUserInstallationsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addInstallation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addInstallation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addInstallationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InstallationServiceImplService">
+    <wsdl:port binding="tns:InstallationServiceImplServiceSoapBinding" name="InstallationServiceImplPort">
+      <soap:address location="http://localhost:8080/services/installationservice"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/services/installationservice</con:endpoint></con:endpoints><con:operation id="f0025b64-b05a-43d9-8c3a-eaa3dac7afbe" isOneWay="false" action="" name="addInstallation" bindingOperationName="addInstallation" type="Request-Response" outputName="addInstallationResponse" inputName="addInstallation" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c9502370-8e32-4a5f-b7c0-16ed7d621493" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/installationservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:addInstallation>\r
+         <arg0>\r
+            <address>Wroclaw</address>\r
+            <routerId>69</routerId>\r
+            <clientId>3</clientId>\r
+            <serviceId>5</serviceId>\r
+         </arg0>\r
+      </ser:addInstallation>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/InstallationService/addInstallation"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="8ce6ff93-aa7c-4e3d-ad32-70bf4b597d40" isOneWay="false" action="" name="getAllUserInstallations" bindingOperationName="getAllUserInstallations" type="Request-Response" outputName="getAllUserInstallationsResponse" inputName="getAllUserInstallations" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9df2377e-3c9f-42ae-bb13-c7738a5faa89" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/installationservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:getAllUserInstallations>\r
+         <arg0>1</arg0>\r
+      </ser:getAllUserInstallations>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/InstallationService/getAllUserInstallations"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d2f9b97f-78ef-4be6-9aac-61194562e104" wsaVersion="NONE" name="ReceivableServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://services.jaxwshibernate.example.com/}ReceivableServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/services/receivableservice?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/services/receivableservice?wsdl"><con:part><con:url>http://localhost:8080/services/receivableservice?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ReceivableServiceImplService" targetNamespace="http://services.jaxwshibernate.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.jaxwshibernate.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.jaxwshibernate.example.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getAllUserReceivableBetweenDates" type="tns:getAllUserReceivableBetweenDates"/>
+      <xs:element name="getAllUserReceivableBetweenDatesResponse" type="tns:getAllUserReceivableBetweenDatesResponse"/>
+      <xs:complexType name="getAllUserReceivableBetweenDates">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:ReceivableRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReceivableRequest">
+        <xs:sequence>
+          <xs:element name="clientId" type="xs:int"/>
+          <xs:element name="fromDate" type="xs:string"/>
+          <xs:element name="toDate" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAllUserReceivableBetweenDatesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReceivableResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReceivableResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="receivables" nillable="true" type="tns:accruedReceivable"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="accruedReceivable">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dueDate" type="tns:localDate"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="installationId" type="tns:installation"/>
+          <xs:element minOccurs="0" name="priceToPay" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType final="extension restriction" name="localDate">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="installation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="clientId" type="tns:client"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="routerId" type="xs:int"/>
+          <xs:element minOccurs="0" name="serviceId" type="tns:service"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="client">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="service">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="price" type="xs:float"/>
+          <xs:element minOccurs="0" name="serviceType" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAllUserReceivableBetweenDatesResponse">
+    <wsdl:part element="tns:getAllUserReceivableBetweenDatesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllUserReceivableBetweenDates">
+    <wsdl:part element="tns:getAllUserReceivableBetweenDates" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ReceivableService">
+    <wsdl:operation name="getAllUserReceivableBetweenDates">
+      <wsdl:input message="tns:getAllUserReceivableBetweenDates" name="getAllUserReceivableBetweenDates"></wsdl:input>
+      <wsdl:output message="tns:getAllUserReceivableBetweenDatesResponse" name="getAllUserReceivableBetweenDatesResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReceivableServiceImplServiceSoapBinding" type="tns:ReceivableService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllUserReceivableBetweenDates">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllUserReceivableBetweenDates">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllUserReceivableBetweenDatesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReceivableServiceImplService">
+    <wsdl:port binding="tns:ReceivableServiceImplServiceSoapBinding" name="ReceivableServiceImplPort">
+      <soap:address location="http://localhost:8080/services/receivableservice"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/services/receivableservice</con:endpoint></con:endpoints><con:operation id="60b9f48c-a688-457a-96c7-6735dd1c17d3" isOneWay="false" action="" name="getAllUserReceivableBetweenDates" bindingOperationName="getAllUserReceivableBetweenDates" type="Request-Response" outputName="getAllUserReceivableBetweenDatesResponse" inputName="getAllUserReceivableBetweenDates" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6b363685-6bc4-46ad-b20e-cbc85194d803" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/receivableservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getAllUserReceivableBetweenDates>
+         <arg0>
+         <clientId>1</clientId>
+            <fromDate>2021-05-07</fromDate>
+            <toDate>2021-05-09</toDate>
+         </arg0>
+      </ser:getAllUserReceivableBetweenDates>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ReceivableService/getAllUserReceivableBetweenDates"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
