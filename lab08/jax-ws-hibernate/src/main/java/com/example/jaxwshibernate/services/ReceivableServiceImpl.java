@@ -1,5 +1,6 @@
 package com.example.jaxwshibernate.services;
 
+import com.example.jaxwshibernate.dto.ReceivableForAddRequest;
 import com.example.jaxwshibernate.dto.ReceivableRequest;
 import com.example.jaxwshibernate.dto.ReceivableResponse;
 import com.example.jaxwshibernate.models.AccruedReceivable;
@@ -47,5 +48,23 @@ public class ReceivableServiceImpl implements ReceivableService{
         ReceivableResponse response = new ReceivableResponse();
         response.setReceivables(userReceivables);
         return response;
+    }
+
+    @Override
+    public Integer addAccruedReceivable(ReceivableForAddRequest request) {
+        Installation installation = installationRepository.getOne(request.getInstallationId());
+        AccruedReceivable receivable = new AccruedReceivable(
+                LocalDate.parse(request.getDueDate()),
+                request.getPriceToPay(),
+                installation
+        );
+        receivable = accruedReceivableRepository.save(receivable);
+        return receivable.getId();
+    }
+
+    @Override
+    public void deleteAccruedReceivable(Integer accruedReceivableId) {
+        AccruedReceivable accruedReceivable = accruedReceivableRepository.getOne(accruedReceivableId);
+        accruedReceivableRepository.delete(accruedReceivable);
     }
 }

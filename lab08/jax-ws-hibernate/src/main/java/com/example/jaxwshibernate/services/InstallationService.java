@@ -12,4 +12,6 @@ public interface InstallationService {
     public InstallationsResponse getAllUserInstallations(@XmlElement(required=true) Integer userId);
 
     public Integer addInstallation(@XmlElement(required=true) InstallationRequest request);
+
+    public void deleteInstallation(@XmlElement(required=true) Integer installationId);
 }

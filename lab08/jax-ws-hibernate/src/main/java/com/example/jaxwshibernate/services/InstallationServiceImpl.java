@@ -42,4 +42,10 @@ public class InstallationServiceImpl implements InstallationService {
         installation = installationRepository.save(installation);
         return installation.getId();
     }
+
+    @Override
+    public void deleteInstallation(Integer installationId) {
+        Installation installation = installationRepository.getOne(installationId);
+        installationRepository.delete(installation);
+    }
 }

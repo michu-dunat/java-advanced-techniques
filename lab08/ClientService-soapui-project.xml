@@ -148,8 +148,18 @@
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.jaxwshibernate.example.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="addInstallation" type="tns:addInstallation"/>
       <xs:element name="addInstallationResponse" type="tns:addInstallationResponse"/>
+      <xs:element name="deleteInstallation" type="tns:deleteInstallation"/>
+      <xs:element name="deleteInstallationResponse" type="tns:deleteInstallationResponse"/>
       <xs:element name="getAllUserInstallations" type="tns:getAllUserInstallations"/>
       <xs:element name="getAllUserInstallationsResponse" type="tns:getAllUserInstallationsResponse"/>
+      <xs:complexType name="deleteInstallation">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteInstallationResponse">
+        <xs:sequence/>
+      </xs:complexType>
       <xs:complexType name="getAllUserInstallations">
         <xs:sequence>
           <xs:element name="arg0" type="xs:int"/>
@@ -214,6 +224,12 @@
   <wsdl:message name="getAllUserInstallations">
     <wsdl:part element="tns:getAllUserInstallations" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="deleteInstallation">
+    <wsdl:part element="tns:deleteInstallation" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteInstallationResponse">
+    <wsdl:part element="tns:deleteInstallationResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="addInstallationResponse">
     <wsdl:part element="tns:addInstallationResponse" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -221,6 +237,10 @@
     <wsdl:part element="tns:addInstallation" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:portType name="InstallationService">
+    <wsdl:operation name="deleteInstallation">
+      <wsdl:input message="tns:deleteInstallation" name="deleteInstallation"></wsdl:input>
+      <wsdl:output message="tns:deleteInstallationResponse" name="deleteInstallationResponse"></wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getAllUserInstallations">
       <wsdl:input message="tns:getAllUserInstallations" name="getAllUserInstallations"></wsdl:input>
       <wsdl:output message="tns:getAllUserInstallationsResponse" name="getAllUserInstallationsResponse"></wsdl:output>
@@ -232,6 +252,15 @@
   </wsdl:portType>
   <wsdl:binding name="InstallationServiceImplServiceSoapBinding" type="tns:InstallationService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteInstallation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteInstallation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteInstallationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getAllUserInstallations">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getAllUserInstallations">
@@ -275,11 +304,47 @@
          <arg0>1</arg0>\r
       </ser:getAllUserInstallations>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/InstallationService/getAllUserInstallations"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d2f9b97f-78ef-4be6-9aac-61194562e104" wsaVersion="NONE" name="ReceivableServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://services.jaxwshibernate.example.com/}ReceivableServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/services/receivableservice?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/services/receivableservice?wsdl"><con:part><con:url>http://localhost:8080/services/receivableservice?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ReceivableServiceImplService" targetNamespace="http://services.jaxwshibernate.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.jaxwshibernate.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/InstallationService/getAllUserInstallations"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3fc1a09f-5601-4931-ad7c-025d4cd130ae" isOneWay="false" action="" name="deleteInstallation" bindingOperationName="deleteInstallation" type="Request-Response" outputName="deleteInstallationResponse" inputName="deleteInstallation" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="dcf0ab61-9898-4aa3-a1e2-cb118576c5a5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/installationservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:deleteInstallation>\r
+         <arg0>11</arg0>\r
+      </ser:deleteInstallation>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/InstallationService/deleteInstallation"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d2f9b97f-78ef-4be6-9aac-61194562e104" wsaVersion="NONE" name="ReceivableServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://services.jaxwshibernate.example.com/}ReceivableServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/services/receivableservice?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/services/receivableservice?wsdl"><con:part><con:url>http://localhost:8080/services/receivableservice?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ReceivableServiceImplService" targetNamespace="http://services.jaxwshibernate.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.jaxwshibernate.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.jaxwshibernate.example.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addAccruedReceivable" type="tns:addAccruedReceivable"/>
+      <xs:element name="addAccruedReceivableResponse" type="tns:addAccruedReceivableResponse"/>
+      <xs:element name="deleteAccruedReceivable" type="tns:deleteAccruedReceivable"/>
+      <xs:element name="deleteAccruedReceivableResponse" type="tns:deleteAccruedReceivableResponse"/>
       <xs:element name="getAllUserReceivableBetweenDates" type="tns:getAllUserReceivableBetweenDates"/>
       <xs:element name="getAllUserReceivableBetweenDatesResponse" type="tns:getAllUserReceivableBetweenDatesResponse"/>
+      <xs:complexType name="deleteAccruedReceivable">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteAccruedReceivableResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="addAccruedReceivable">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:ReceivableForAddRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReceivableForAddRequest">
+        <xs:sequence>
+          <xs:element name="dueDate" type="xs:string"/>
+          <xs:element name="priceToPay" type="xs:float"/>
+          <xs:element name="installationId" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addAccruedReceivableResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="getAllUserReceivableBetweenDates">
         <xs:sequence>
           <xs:element name="arg0" type="tns:ReceivableRequest"/>
@@ -338,6 +403,18 @@
       </xs:complexType>
     </xs:schema>
   </wsdl:types>
+  <wsdl:message name="deleteAccruedReceivableResponse">
+    <wsdl:part element="tns:deleteAccruedReceivableResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteAccruedReceivable">
+    <wsdl:part element="tns:deleteAccruedReceivable" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addAccruedReceivable">
+    <wsdl:part element="tns:addAccruedReceivable" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addAccruedReceivableResponse">
+    <wsdl:part element="tns:addAccruedReceivableResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getAllUserReceivableBetweenDatesResponse">
     <wsdl:part element="tns:getAllUserReceivableBetweenDatesResponse" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -345,6 +422,14 @@
     <wsdl:part element="tns:getAllUserReceivableBetweenDates" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:portType name="ReceivableService">
+    <wsdl:operation name="deleteAccruedReceivable">
+      <wsdl:input message="tns:deleteAccruedReceivable" name="deleteAccruedReceivable"></wsdl:input>
+      <wsdl:output message="tns:deleteAccruedReceivableResponse" name="deleteAccruedReceivableResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addAccruedReceivable">
+      <wsdl:input message="tns:addAccruedReceivable" name="addAccruedReceivable"></wsdl:input>
+      <wsdl:output message="tns:addAccruedReceivableResponse" name="addAccruedReceivableResponse"></wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getAllUserReceivableBetweenDates">
       <wsdl:input message="tns:getAllUserReceivableBetweenDates" name="getAllUserReceivableBetweenDates"></wsdl:input>
       <wsdl:output message="tns:getAllUserReceivableBetweenDatesResponse" name="getAllUserReceivableBetweenDatesResponse"></wsdl:output>
@@ -352,6 +437,24 @@
   </wsdl:portType>
   <wsdl:binding name="ReceivableServiceImplServiceSoapBinding" type="tns:ReceivableService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteAccruedReceivable">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteAccruedReceivable">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteAccruedReceivableResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addAccruedReceivable">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addAccruedReceivable">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addAccruedReceivableResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getAllUserReceivableBetweenDates">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getAllUserReceivableBetweenDates">
@@ -378,4 +481,159 @@
          </arg0>
       </ser:getAllUserReceivableBetweenDates>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ReceivableService/getAllUserReceivableBetweenDates"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ReceivableService/getAllUserReceivableBetweenDates"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="54dd4795-0e95-4885-927b-049c2e1ab72d" isOneWay="false" action="" name="addAccruedReceivable" bindingOperationName="addAccruedReceivable" type="Request-Response" outputName="addAccruedReceivableResponse" inputName="addAccruedReceivable" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4bee220a-f571-4338-b753-eacc68faad77" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/receivableservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:addAccruedReceivable>\r
+         <arg0>\r
+            <dueDate>2021-06-07</dueDate>\r
+            <priceToPay>50.0</priceToPay>\r
+            <installationId>11</installationId>\r
+         </arg0>\r
+      </ser:addAccruedReceivable>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ReceivableService/addAccruedReceivable"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="8af091a5-6738-4ec8-9e3c-25e93fe50806" isOneWay="false" action="" name="deleteAccruedReceivable" bindingOperationName="deleteAccruedReceivable" type="Request-Response" outputName="deleteAccruedReceivableResponse" inputName="deleteAccruedReceivable" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4370754c-9571-4a23-96cc-da6ebc9ea2fa" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/receivableservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:deleteAccruedReceivable>\r
+         <arg0>15</arg0>\r
+      </ser:deleteAccruedReceivable>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ReceivableService/deleteAccruedReceivable"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="59c77b81-0e32-43e6-96d7-4a7c06bffad1" wsaVersion="NONE" name="ServiceServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://services.jaxwshibernate.example.com/}ServiceServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/services/serviceservice?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/services/serviceservice?wsdl"><con:part><con:url>http://localhost:8080/services/serviceservice?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ServiceServiceImplService" targetNamespace="http://services.jaxwshibernate.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.jaxwshibernate.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.jaxwshibernate.example.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addService" type="tns:addService"/>
+      <xs:element name="addServiceResponse" type="tns:addServiceResponse"/>
+      <xs:element name="deleteService" type="tns:deleteService"/>
+      <xs:element name="deleteServiceResponse" type="tns:deleteServiceResponse"/>
+      <xs:element name="getAllServices" type="tns:getAllServices"/>
+      <xs:element name="getAllServicesResponse" type="tns:getAllServicesResponse"/>
+      <xs:complexType name="getAllServices">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getAllServicesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ServicesResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ServicesResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="services" nillable="true" type="tns:service"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="service">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="price" type="xs:float"/>
+          <xs:element minOccurs="0" name="serviceType" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addService">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:string"/>
+          <xs:element name="arg1" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteService">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteServiceResponse">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="deleteServiceResponse">
+    <wsdl:part element="tns:deleteServiceResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllServices">
+    <wsdl:part element="tns:getAllServices" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllServicesResponse">
+    <wsdl:part element="tns:getAllServicesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addService">
+    <wsdl:part element="tns:addService" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addServiceResponse">
+    <wsdl:part element="tns:addServiceResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteService">
+    <wsdl:part element="tns:deleteService" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServiceService">
+    <wsdl:operation name="getAllServices">
+      <wsdl:input message="tns:getAllServices" name="getAllServices"></wsdl:input>
+      <wsdl:output message="tns:getAllServicesResponse" name="getAllServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addService">
+      <wsdl:input message="tns:addService" name="addService"></wsdl:input>
+      <wsdl:output message="tns:addServiceResponse" name="addServiceResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteService">
+      <wsdl:input message="tns:deleteService" name="deleteService"></wsdl:input>
+      <wsdl:output message="tns:deleteServiceResponse" name="deleteServiceResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceServiceImplServiceSoapBinding" type="tns:ServiceService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllServices">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllServices">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllServicesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addService">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addService">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addServiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteService">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteService">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteServiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceServiceImplService">
+    <wsdl:port binding="tns:ServiceServiceImplServiceSoapBinding" name="ServiceServiceImplPort">
+      <soap:address location="http://localhost:8080/services/serviceservice"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/services/serviceservice</con:endpoint></con:endpoints><con:operation id="b3bfc46e-131e-4792-8355-98238d20e545" isOneWay="false" action="" name="getAllServices" bindingOperationName="getAllServices" type="Request-Response" outputName="getAllServicesResponse" inputName="getAllServices" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="99a56926-a63d-4e2c-aa0e-16213e398550" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/serviceservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:getAllServices/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ServiceService/getAllServices"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="67793e61-d7e3-41a7-8435-617d6bb13b6b" isOneWay="false" action="" name="deleteService" bindingOperationName="deleteService" type="Request-Response" outputName="deleteServiceResponse" inputName="deleteService" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6491f63b-501b-4045-9f53-92e76f9a4af4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/serviceservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:deleteService>\r
+         <arg0>8</arg0>\r
+      </ser:deleteService>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ServiceService/deleteService"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d2841ecc-0e77-4192-8ab8-e7824d0e951e" isOneWay="false" action="" name="addService" bindingOperationName="addService" type="Request-Response" outputName="addServiceResponse" inputName="addService" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f25c18a8-e893-4138-a216-c304005e04bd" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/serviceservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.jaxwshibernate.example.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:addService>\r
+         <arg0>Internet 2Gb/s</arg0>\r
+         <arg1>100.0</arg1>\r
+      </ser:addService>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.jaxwshibernate.example.com/ServiceService/addService"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
