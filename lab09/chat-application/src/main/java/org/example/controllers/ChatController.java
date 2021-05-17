@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import org.example.utility.CommunicationHandler;
 import org.example.utility.MyListener;
 
+
 import javax.crypto.NoSuchPaddingException;
 import java.io.*;
 import java.security.*;
@@ -41,6 +42,9 @@ public class ChatController implements MyListener {
 
     @FXML
     public void initialize() throws NoSuchPaddingException, NoSuchAlgorithmException {
+        System.setProperty("java.security.policy", "./java.policy");
+        System.setSecurityManager(new SecurityManager());
+
         communicationHandler = new CommunicationHandler();
         sendPublicKeyButton.setDisable(true);
         connectButton.setDisable(true);
@@ -88,4 +92,6 @@ public class ChatController implements MyListener {
     public void messageReceived(String theLine) {
         chatTextArea.appendText("\n" + dateTimeFormatter.format(LocalDateTime.now()) + " - Friend: " + theLine);
     }
+
+
 }

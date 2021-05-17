@@ -1,0 +1,18 @@
+keystore "file:C:/Program Files/Java/jdk-11.0.10/bin/michukeys.jks", "JKS", "SUN";
+
+keystorePasswordURL "file:/C:/Users/konta/Desktop/keystore.pass";
+
+grant signedBy "michu", codeBase "file:/C:/Users/konta/Desktop/signed-chat-library-1.0-SNAPSHOT.jar" {
+    permission java.net.SocketPermission "*:100-", "connect, resolve, accept, listen";
+};
+
+grant codeBase "file:/E:/semestr5/java_roboczy/lab09/chat-application/target/-" {
+    permission java.net.SocketPermission "*:100-", "connect, resolve, accept, listen";
+};
+
+grant codeBase "file:/C:/Users/konta/.m2/repository/org/openjfx/-" {
+   permission java.util.PropertyPermission "*", "read, write";
+   permission java.io.FilePermission "<<ALL FILES>>", "read, write, delete, execute";
+   permission java.net.SocketPermission "*:100-", "connect, resolve, accept, listen";
+};
+
