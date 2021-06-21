@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
@@ -72,6 +73,7 @@ public class MainWindowController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        File file = new File("a");
         namesAndScriptsHashMap.put(loadedFile.getName(), script);
         scriptNamesArrayList.add(loadedFile.getName());
     }

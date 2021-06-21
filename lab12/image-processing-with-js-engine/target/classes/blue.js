@@ -1,5 +1,5 @@
 //https://stackoverflow.com/questions/39667665/rgb-image-filter-in-java
-
+var BufferedImage = Java.type("java.awt.image.BufferedImage");
 var Color = Java.type("java.awt.Color");
 
 function process(imgObj) {

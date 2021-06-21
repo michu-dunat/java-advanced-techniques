@@ -1,5 +1,5 @@
 //https://github.com/praserocking/MedianFilter/blob/master/MedianFilter.java
-
+var BufferedImage = Java.type("java.awt.image.BufferedImage");
 var Color = Java.type("java.awt.Color");
 
 function process(imgObj) {

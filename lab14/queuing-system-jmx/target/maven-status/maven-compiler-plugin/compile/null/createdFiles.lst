@@ -1,0 +1,7 @@
+org\example\cases\ExtendValidityOfIdCardCase.class
+org\example\cases\Case.class
+org\example\Main.class
+org\example\controllers\MainWindowController.class
+org\example\cases\ChangeLastNameCase.class
+org\example\cases\ExtendValidityOfPassportCase.class
+org\example\cases\EstablishTrustedProfileCase.class
