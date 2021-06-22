@@ -13,62 +13,61 @@ import org.example.MainWindowControllerMXBean;
 import org.example.cases.CaseCategory;
 
 import javax.management.*;
-
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
 public class ClientWindowController implements NotificationListener {
 
+    MainWindowControllerMXBean proxy;
     @FXML
     private ListView<CaseCategory> categoryListView;
-
     @FXML
     private Button addCategoryButton;
-
     @FXML
     private Button deleteCategoryButton;
-
     @FXML
-    private TextField categoryPirorityTextField;
-
+    private TextField categoryPriorityTextField;
     @FXML
-    private Button editPiorityButton;
-
+    private Button editPriorityButton;
     @FXML
     private TextField categoryNameTextField;
-
-    private ObservableList caseObservableList = FXCollections.observableArrayList();
+    private ObservableList categoryObservableList = FXCollections.observableArrayList();
+    @FXML
+    private TextField letterTextField;
+    @FXML
+    private TextArea notificationTextArea;
 
     @FXML
     void addCategoryButtonOnAction(ActionEvent event) {
-        CaseCategory caseCategory = new CaseCategory(categoryNameTextField.getText(), Integer.parseInt(categoryPirorityTextField.getText()), currentChar);
-        currentChar += 1;
-        caseObservableList.add(caseCategory);
-        proxy.setCaseCategoryList(caseObservableList);
+        CaseCategory caseCategory = new CaseCategory(categoryNameTextField.getText(), Integer.parseInt(categoryPriorityTextField.getText()), letterTextField.getText());
+        synchronized (categoryObservableList) {
+            categoryObservableList.add(caseCategory);
+        }
+        proxy.setCaseCategoryList(categoryObservableList);
     }
 
     @FXML
     void deleteCategoryButtonOnAction(ActionEvent event) {
-        caseObservableList.remove(categoryListView.getSelectionModel().getSelectedItem());
-        proxy.setCaseCategoryList(caseObservableList);
+        synchronized (categoryObservableList) {
+            categoryObservableList.remove(categoryListView.getSelectionModel().getSelectedItem());
+        }
+        proxy.setCaseCategoryList(categoryObservableList);
     }
 
     @FXML
     void editPriorityButtonOnAction(ActionEvent event) {
         CaseCategory caseCategory = categoryListView.getSelectionModel().getSelectedItem();
-        caseCategory.setPriority(Integer.parseInt(categoryPirorityTextField.getText()));
-        caseObservableList.set(categoryListView.getSelectionModel().getSelectedIndex(), caseCategory);
-        proxy.setCaseCategoryList(caseObservableList);
+        caseCategory.setPriority(Integer.parseInt(categoryPriorityTextField.getText()));
+        synchronized (categoryObservableList) {
+            categoryObservableList.set(categoryListView.getSelectionModel().getSelectedIndex(), caseCategory);
+        }
+        proxy.setCaseCategoryList(categoryObservableList);
     }
-
-    private char currentChar = 'A';
-
-    MainWindowControllerMXBean proxy;
 
     @FXML
     public void initialize() throws Exception {
-        categoryListView.setItems(caseObservableList);
+        categoryListView.setItems(categoryObservableList);
 
         int jmxPort = 8008;
         JMXServiceURL target = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://localhost:" + jmxPort + "/jmxrmi");
@@ -77,19 +76,18 @@ public class ClientWindowController implements NotificationListener {
         proxy = JMX.newMXBeanProxy(mbs, new ObjectName("org.example.controllers:name=" + "MainWindowController"), MainWindowControllerMXBean.class);
         mbs.addNotificationListener(new ObjectName("org.example.controllers:name=" + "MainWindowController"), this, null, null);
 
-        caseObservableList.addAll(proxy.getCaseCategoryList());
+        categoryObservableList.addAll(proxy.getCaseCategoryList());
     }
-
-    @FXML
-    private TextArea notificationTextArea;
 
     @Override
     public void handleNotification(Notification notification, Object handback) {
-        Platform.runLater(() -> {
-            caseObservableList.clear();
-            caseObservableList.addAll(proxy.getCaseCategoryList());
-            notificationTextArea.appendText(notification.getMessage() + System.getProperty("line.separator"));
-        });
+        synchronized (categoryObservableList) {
+            Platform.runLater(() -> {
+                categoryObservableList.clear();
+                categoryObservableList.addAll(proxy.getCaseCategoryList());
+                notificationTextArea.appendText(notification.getMessage() + System.getProperty("line.separator"));
+            });
+        }
     }
 }
 

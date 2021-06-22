@@ -7,6 +7,7 @@ import java.util.List;
 public interface MainWindowControllerMXBean {
 
     public List<CaseCategory> getCaseCategoryList();
+
     public void setCaseCategoryList(List<CaseCategory> observableList);
 
 }

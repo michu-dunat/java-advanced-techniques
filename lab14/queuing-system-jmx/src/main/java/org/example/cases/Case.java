@@ -7,7 +7,7 @@ public class Case {
 
     public Case(CaseCategory caseCategory, Integer id) {
         this.caseCategory = caseCategory;
-        this.id = caseCategory.getLetter() + id.toString();
+        this.id = caseCategory.getSymbol() + id.toString();
     }
 
     public CaseCategory getCaseCategory() {

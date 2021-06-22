@@ -9,21 +9,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import org.example.MainWindowControllerMXBean;
-import org.example.cases.*;
-
-import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import org.example.cases.Case;
+import org.example.cases.CaseCategory;
+import org.example.cases.CaseComparator;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MainWindowController extends NotificationBroadcasterSupport implements MainWindowControllerMXBean {
 
     ObservableList categoryObservableList = FXCollections.observableArrayList();
     ObservableList caseObservableList = FXCollections.observableArrayList();
+    ArrayList<Case> allCases = new ArrayList<>();
     @FXML
     private ListView<CaseCategory> categoryListView;
     @FXML
@@ -32,8 +35,19 @@ public class MainWindowController extends NotificationBroadcasterSupport impleme
     private ListView<Case> caseListView;
     @FXML
     private TextField currentCaseTextField;
-
-    ArrayList<Case> allCases = new ArrayList<>();
+    private Integer sequenceNumber = 0;
+    @FXML
+    private TextField categoryNameTextField;
+    @FXML
+    private TextField categoryPriorityTextField;
+    @FXML
+    private TextField letterTextField;
+    @FXML
+    private Button addCategoryButton;
+    @FXML
+    private Button deleteCategoryButton;
+    @FXML
+    private Button editPriorityButton;
 
     @FXML
     void fillCaseButtonOnAction(ActionEvent event) {
@@ -65,7 +79,7 @@ public class MainWindowController extends NotificationBroadcasterSupport impleme
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true) {
+                while (true) {
                     Case currentCase = null;
                     if (!caseObservableList.isEmpty()) {
                         currentCase = (Case) caseObservableList.get(0);
@@ -102,24 +116,56 @@ public class MainWindowController extends NotificationBroadcasterSupport impleme
         synchronized (categoryObservableList) {
             return categoryObservableList;
         }
-
     }
-
-    private Integer sequenceNumber = 0;
 
     @Override
     public void setCaseCategoryList(List observableList) {
         synchronized (categoryObservableList) {
-            categoryObservableList.clear();
-            categoryObservableList.addAll(observableList);
-            notifyCategoryChange("Halo?");
+            Platform.runLater(() -> {
+                categoryObservableList.clear();
+                categoryObservableList.addAll(observableList);
+            });
         }
-
     }
 
-    public void notifyCategoryChange(String msg) {
-        Notification notification = new Notification("queuesyspack.AgentFrame", this, sequenceNumber++, msg);
+    public void notifyClient(String msg) {
+        Notification notification = new Notification("Notification", this, sequenceNumber++, msg);
         sendNotification(notification);
+    }
+
+    @FXML
+    void addCategoryButtonOnAction(ActionEvent event) {
+        CaseCategory caseCategory = new CaseCategory(categoryNameTextField.getText(), Integer.parseInt(categoryPriorityTextField.getText()), letterTextField.getText());
+        synchronized (categoryObservableList) {
+            categoryObservableList.add(caseCategory);
+        }
+        String msg = "Dodano kategorię " + caseCategory.getName() + " o priorytecie " + caseCategory.getPriority() + " i symbolu " + caseCategory.getSymbol() + ".";
+        String timestamp = "[ " + new Timestamp(System.currentTimeMillis()) + " ] ";
+        notifyClient(timestamp + msg);
+    }
+
+    @FXML
+    void deleteCategoryButtonOnAction(ActionEvent event) {
+        CaseCategory caseCategory = categoryListView.getSelectionModel().getSelectedItem();
+        synchronized (categoryObservableList) {
+            categoryObservableList.remove(categoryListView.getSelectionModel().getSelectedItem());
+        }
+        String timestamp = "[ " + new Timestamp(System.currentTimeMillis()) + " ] ";
+        String msg = "Usunięto kategorię " + caseCategory.getName() + " o priorytecie " + caseCategory.getPriority() + " i symbolu " + caseCategory.getSymbol() + ".";
+        notifyClient(timestamp + msg);
+    }
+
+    @FXML
+    void editPriorityButtonOnAction(ActionEvent event) {
+        CaseCategory caseCategory = categoryListView.getSelectionModel().getSelectedItem();
+        String msg = "Zmieniono priorytet kategorii " + caseCategory.getName() + " o symbolu " + caseCategory.getSymbol() + " z " + caseCategory.getPriority();
+        caseCategory.setPriority(Integer.parseInt(categoryPriorityTextField.getText()));
+        synchronized (categoryObservableList) {
+            categoryObservableList.set(categoryListView.getSelectionModel().getSelectedIndex(), caseCategory);
+        }
+        msg += " na " + caseCategory.getPriority();
+        String timestamp = "[ " + new Timestamp(System.currentTimeMillis()) + " ] ";
+        notifyClient(timestamp + msg);
     }
 
 }

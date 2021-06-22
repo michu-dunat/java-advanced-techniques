@@ -32,24 +32,35 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox prefHeight="320.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.MainWindowController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/15.0.1"
+      fx:controller="org.example.controllers.MainWindowController">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
-                <ListView fx:id="categoryListView" layoutX="42.0" layoutY="48.0" prefHeight="200.0" prefWidth="200.0" />
-                <Button fx:id="fillCaseButton" layoutX="99.0" layoutY="269.0" mnemonicParsing="false" onAction="#fillCaseButtonOnAction" text="Załóż sprawę" />
-                <Label layoutX="42.0" layoutY="15.0" text="Kategorie:" />
-                <ListView fx:id="caseListView" layoutX="258.0" layoutY="48.0" prefHeight="200.0" prefWidth="124.0" />
-                <Label layoutX="258.0" layoutY="15.0" text="Lista założonych spraw:" />
-            <Label layoutX="428.0" layoutY="92.0" prefHeight="17.0" prefWidth="164.0" text="Obecnie rozpatrywana sprawa:" />
-            <TextField fx:id="currentCaseTextField" editable="false" layoutX="436.0" layoutY="123.0" />
+                <ListView fx:id="categoryListView" layoutX="42.0" layoutY="48.0" prefHeight="200.0" prefWidth="200.0"/>
+                <Button fx:id="fillCaseButton" layoutX="43.0" layoutY="269.0" mnemonicParsing="false"
+                        onAction="#fillCaseButtonOnAction" text="Załóż sprawę"/>
+                <Label layoutX="42.0" layoutY="15.0" text="Kategorie:"/>
+                <ListView fx:id="caseListView" layoutX="258.0" layoutY="48.0" prefHeight="200.0" prefWidth="124.0"/>
+                <Label layoutX="258.0" layoutY="15.0" text="Lista założonych spraw:"/>
+                <Label layoutX="428.0" layoutY="92.0" prefHeight="17.0" prefWidth="164.0"
+                       text="Obecnie rozpatrywana sprawa:"/>
+                <TextField fx:id="currentCaseTextField" editable="false" layoutX="436.0" layoutY="123.0"/>
+                <Label layoutX="42.0" layoutY="313.0" text="Nazwa kategorii:"/>
+                <Label layoutX="246.0" layoutY="313.0" text="Priorytet:"/>
+                <Label layoutX="443.0" layoutY="313.0" text="Symbol:"/>
+                <TextField fx:id="categoryNameTextField" layoutX="42.0" layoutY="346.0"/>
+                <TextField fx:id="categoryPriorityTextField" layoutX="246.0" layoutY="346.0"/>
+                <TextField fx:id="letterTextField" layoutX="443.0" layoutY="346.0"/>
+                <Button fx:id="addCategoryButton" layoutX="163.0" layoutY="401.0" mnemonicParsing="false"
+                        onAction="#addCategoryButtonOnAction" text="Dodaj kateogrię"/>
+                <Button fx:id="deleteCategoryButton" layoutX="145.0" layoutY="269.0" mnemonicParsing="false"
+                        onAction="#deleteCategoryButtonOnAction" text="Usuń kategorię"/>
+                <Button fx:id="editPriorityButton" layoutX="377.0" layoutY="401.0" mnemonicParsing="false"
+                        onAction="#editPriorityButtonOnAction" text="Edytuj priorytet"/>
             </children>
         </AnchorPane>
     </children>
